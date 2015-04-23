@@ -130,7 +130,7 @@ public class RestController {
 			if(endereco != null){
 				json = mapper.writeValueAsString(endereco);
 			} else {
-				json = "CEP not found!";
+				json = "CEP invalido!";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
