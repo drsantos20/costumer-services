@@ -8,13 +8,13 @@ CREATE DATABASE enderecos;
 CREATE TABLE `menagerie`.`endereco`
 (
 endereco_id bigint(20),
-bairro varchar(255),
-cep varchar(255),
-cidade varchar(255),
-complemento varchar(255),
-estado varchar(255),
-numero varchar(255),
-rua varchar(255)
+bairro varchar(55),
+cep varchar(60),
+cidade varchar(55),
+complemento varchar(55),
+estado varchar(55),
+numero varchar(55),
+rua varchar(80)
 );
 
 
