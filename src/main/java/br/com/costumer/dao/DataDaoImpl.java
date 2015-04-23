@@ -55,7 +55,6 @@ public class DataDaoImpl implements DataDao {
 			int subs = cep.length();;
 			for (int i = 0; i < cep.length(); i++) {
 				cep = changeCharInPosition(subs-1, '0', cep);
-				System.out.println(cep);
 				subs=subs-1;
 				
 				query.setParameter("cep", cep);

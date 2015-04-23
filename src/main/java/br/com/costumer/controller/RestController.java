@@ -34,15 +34,6 @@ public class RestController {
 		
 		String enderecoIsEmpty = "";
 		
-//		{	"cep" : "11111111-1",
-//			"numero" : "167",
-//			"bairro" : "vl fachini",
-//			"cidade" : "sp",
-//			"estado" : "sp",
-//			"complemento" : "casa"
-//		}
-		
-		
 		if(StringUtils.isBlank(endereco.getRua())) {
 			enderecoIsEmpty += " rua,";
 		} 
@@ -102,9 +93,11 @@ public class RestController {
 			endereco = dataServices.getCEP(cep);
 			if(endereco != null){
 				json = mapper.writeValueAsString(endereco);
+			} else {
+				json = "CEP not found!";
 			}
 		} catch (Exception e) {
-			json = "CEP not found!";
+			e.printStackTrace();
 		}
 		return json;
 	}

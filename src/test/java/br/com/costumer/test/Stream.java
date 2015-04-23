@@ -3,14 +3,20 @@ package br.com.costumer.test;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
-
-public class Programming {
+public class Stream {
+	
+	public static void readFromString(String inputString) {
+		Scanner scanner = new Scanner(inputString);
+		
+		while(scanner.hasNext())
+			System.out.println(getFirstNonRepeatedChar(scanner.next()));
+		scanner.close();
+	}
 	
 	public static void main(String[] args) {
-		
-		System.out.println(getFirstNonRepeatedChar("aAbBABac"));
-		
+		Stream.readFromString("aAbBABac");
 	}
 	
 	public static char getFirstNonRepeatedChar(String str) {
@@ -25,5 +31,4 @@ public class Programming {
 		}
 		throw new RuntimeException("didn't find any non repeated Character");
 	}
-
 }
