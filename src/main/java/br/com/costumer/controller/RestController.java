@@ -37,7 +37,7 @@ public class RestController {
 			enderecoIsEmpty += " rua,";
 		} 
 		if(StringUtils.isBlank(endereco.getNumero())) {
-			enderecoIsEmpty += " endereco,";
+			enderecoIsEmpty += " numero,";
 		} 
 		if(StringUtils.isBlank(endereco.getCep())) {
 			enderecoIsEmpty += " cep,";
@@ -93,7 +93,7 @@ public class RestController {
 			enderecoIsEmpty += " rua,";
 		} 
 		if(StringUtils.isBlank(endereco.getNumero())) {
-			enderecoIsEmpty += " endereco,";
+			enderecoIsEmpty += " numero,";
 		} 
 		if(StringUtils.isBlank(endereco.getCep())) {
 			enderecoIsEmpty += " cep,";
