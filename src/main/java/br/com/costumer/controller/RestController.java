@@ -29,8 +29,7 @@ public class RestController {
 	static final Logger logger = Logger.getLogger(RestController.class);
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody
-	Status addEndereco(@RequestBody Endereco endereco) {
+	public @ResponseBody Status addEndereco(@RequestBody Endereco endereco) {
 		
 		String enderecoIsEmpty = "";
 		
@@ -52,7 +51,7 @@ public class RestController {
 		
 		if(StringUtils.isNotEmpty(enderecoIsEmpty)){
 			enderecoIsEmpty = enderecoIsEmpty.substring(0, enderecoIsEmpty.length()-1);
-			return new Status(1, "Os campos:" + enderecoIsEmpty + " sao obrigatorios");
+			return new Status(1, "The fields:" + enderecoIsEmpty + " is required");
 		}
 		
 		try {
@@ -62,12 +61,10 @@ public class RestController {
 			 e.printStackTrace();
 			return new Status(0, e.toString());
 		}
-
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody
-	String getEndereco(@PathVariable("id") long id) {
+	public @ResponseBody String getEndereco(@PathVariable("id") long id) {
 		Endereco endereco = null;
 		String json = "";
 		ObjectWriter mapper = new ObjectMapper().writer().withDefaultPrettyPrinter();;
@@ -83,9 +80,48 @@ public class RestController {
 	}
 	
 	
+	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Status updateEndereco(@RequestBody Endereco endereco) {
+		
+		String enderecoIsEmpty = "";
+		
+		if(endereco.getId() == 0) {
+			return new Status(1, "Id is required for update");
+		}
+		
+		if(StringUtils.isBlank(endereco.getRua())) {
+			enderecoIsEmpty += " rua,";
+		} 
+		if(StringUtils.isBlank(endereco.getNumero())) {
+			enderecoIsEmpty += " endereco,";
+		} 
+		if(StringUtils.isBlank(endereco.getCep())) {
+			enderecoIsEmpty += " cep,";
+		} 
+		if(StringUtils.isBlank(endereco.getCidade())) {
+			enderecoIsEmpty += " cidade,";
+		} 
+		if(StringUtils.isBlank(endereco.getEstado())) {
+			enderecoIsEmpty += " estado,";
+		}
+		
+		if(StringUtils.isNotEmpty(enderecoIsEmpty)){
+			enderecoIsEmpty = enderecoIsEmpty.substring(0, enderecoIsEmpty.length()-1);
+			return new Status(1, "The fields:" + enderecoIsEmpty + " is required");
+		}
+		
+		try {
+			dataServices.updateEntity(endereco);
+			return new Status(1, "Endereco updated Successfully !");
+		} catch (Exception e) {
+			return new Status(0, "Id not found for update!");
+		}
+	}
+	
+	
+	
 	@RequestMapping(value = "/cep/{id}", method = RequestMethod.GET)
-	public @ResponseBody
-	String getCEP(@PathVariable("id") String cep) {
+	public @ResponseBody String getCEP(@PathVariable("id") String cep) {
 		Endereco endereco = null;
 		String json = "";
 		ObjectWriter mapper = new ObjectMapper().writer().withDefaultPrettyPrinter();;
@@ -104,8 +140,7 @@ public class RestController {
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public @ResponseBody
-	List<Endereco> getEndereco() {
+	public @ResponseBody List<Endereco> getEndereco() {
 
 		List<Endereco> enderecoList = null;
 		try {
@@ -119,8 +154,7 @@ public class RestController {
 	}
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-	public @ResponseBody
-	Status deleteEndereco(@PathVariable("id") long id) {
+	public @ResponseBody Status deleteEndereco(@PathVariable("id") long id) {
 
 		try {
 			dataServices.deleteEntity(id);

@@ -102,4 +102,24 @@ public class DataDaoImpl implements DataDao {
 	    return new String(charArray);
 	}
 
+	@Override
+	public boolean updateEntity(Endereco endereco) throws Exception {
+		session = sessionFactory.openSession();
+		Endereco enderecoFound = (Endereco) session.load(Endereco.class, endereco.getId());
+		
+		enderecoFound.setBairro(endereco.getBairro());
+		enderecoFound.setCep(endereco.getCep());
+		enderecoFound.setCidade(endereco.getCidade());
+		enderecoFound.setComplemento(endereco.getComplemento());
+		enderecoFound.setEstado(endereco.getEstado());
+		enderecoFound.setNumero(endereco.getNumero());
+		enderecoFound.setRua(endereco.getRua());
+		
+		tx = session.getTransaction();
+		session.beginTransaction();
+		session.save(enderecoFound);
+		tx.commit();
+		return false;
+	}
+
 }

@@ -37,4 +37,9 @@ public class DataServicesImpl implements DataServices {
 		return dataDao.getEntityByCEP(cep);
 	}
 
+	@Override
+	public boolean updateEntity(Endereco endereco) throws Exception {
+		return dataDao.updateEntity(endereco);
+	}
+
 }
