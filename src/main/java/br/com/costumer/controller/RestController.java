@@ -111,8 +111,11 @@ public class RestController {
 		}
 		
 		try {
-			dataServices.updateEntity(endereco);
-			return new Status(1, "Endereco updated Successfully !");
+			Endereco enderecoFounded = dataServices.getEntityById(endereco.getId());
+			if(enderecoFounded != null)
+				dataServices.updateEntity(endereco);
+				return new Status(1, "Endereco updated Successfully !");
+
 		} catch (Exception e) {
 			return new Status(0, "Id not found for update!");
 		}
